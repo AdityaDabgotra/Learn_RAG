@@ -6,7 +6,8 @@ loader = DirectoryLoader(
     loader_cls=PyMuPDFLoader
 )
 
-pdf = loader.load()
+# pdf = loader.load()
+pdf = loader.lazy_load()
 
 print(type(pdf))
 print(len(pdf))
