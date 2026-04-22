@@ -6,3 +6,4 @@ pdf = doc.load()
 
 print(pdf)
 print(type(pdf))
+print(len(pdf))
