@@ -9,7 +9,7 @@ load_dotenv()
 model = ChatOpenAI()
 
 prompt = PromptTemplate(
-    template="Write a summary for the following paragraph - {poem}",
+    template="Write a summary for the following paragraph - {paragraph}",
     input_variables=['paragraph']
 )
 
@@ -28,4 +28,4 @@ print(docs[0].page_content)
 
 chain = prompt | model | parser
 
-print(chain.invoke({'poem':docs[0].page_content}))
+print(chain.invoke({'paragraph':docs[0].page_content}))
