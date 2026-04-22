@@ -8,4 +8,7 @@ loader = DirectoryLoader(
 
 pdf = loader.load()
 
-print(pdf)
+print(type(pdf))
+print(len(pdf))
+print(pdf[57].page_content)
+
