@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-model = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
 prompt = PromptTemplate(
     template="Write a summary for the following paragraph - {paragraph}",
@@ -18,12 +18,12 @@ parser = StrOutputParser()
 loader = TextLoader("../data/text_files/text1.txt",encoding="utf-8")
 
 docs = loader.load()
-print(docs)
-print(type(docs))
-print(len(docs))
+# print(docs)
+# print(type(docs))
+# print(len(docs))
 
-print(docs[0])
-print(docs[0].page_content)
+# print(docs[0])
+# print(docs[0].page_content)
 
 
 chain = prompt | model | parser
