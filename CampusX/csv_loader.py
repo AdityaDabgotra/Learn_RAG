@@ -9,5 +9,6 @@ data = loader.lazy_load()
 # print(len(data))
 # print(data[0].page_content)
 # print(data[0].metadata)
+
 for item in data:
     print(item.page_content)
