@@ -12,7 +12,7 @@ class Student:
     
     def isPassing(self):
         return self.grade >= 6.0
-
+#Example usage
 student1 = Student('Aditya',22,8.8)
 print(student1.get_details)
 
