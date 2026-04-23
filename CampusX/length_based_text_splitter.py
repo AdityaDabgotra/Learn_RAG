@@ -13,5 +13,7 @@ splitter = CharacterTextSplitter(
 )
 
 result = splitter.split_text(text)
+# result = splitter.split_documents(docs)  for splitting document types
+
 print(result)
 print(len(result))
