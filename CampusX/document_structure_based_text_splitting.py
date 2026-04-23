@@ -1,7 +1,7 @@
 from langchain_text_splitters import MarkdownTextSplitter
 
 splitter = MarkdownTextSplitter(
-    chunk_size = 50,
+    chunk_size = 300,
     chunk_overlap = 0,
 )
 
