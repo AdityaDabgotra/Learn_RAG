@@ -1,8 +1,9 @@
 
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from langchain_core.documents import Document
+
 
 doc1 = Document(
     page_content = "RCB is Lollipop",
@@ -30,10 +31,10 @@ vector_store = Chroma(
 )
 
 # add documents
-vector_store.add_documents(docs)
+ids = vector_store.add_documents(docs)
 
 #view documents
-vector_store.get(include=['embeddings','documents','metadata'])
+vector_store.get(include=['embeddings','documents','metadatas'])
 
 #search documents
 print(vector_store.similarity_search(
@@ -52,7 +53,7 @@ updated_doc1 = Document(
     page_content = "RCB 49 ,RCB trophy 1 CSK ban 2",
     metadata = {"team":"Royal Challengers Bangalore"}
 )
-vector_store.update_document(document_id='6e6ba6f0-263a-464e-baff-c0735332fa1d',document=updated_doc1)
+vector_store.update_document(document_id=ids[0],document=updated_doc1)
 
 print(vector_store.similarity_search(
     query = "trophy",
