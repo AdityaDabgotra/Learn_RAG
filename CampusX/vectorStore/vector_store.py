@@ -3,7 +3,8 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from langchain_core.documents import Document
-
+from dotenv import load_dotenv
+load_dotenv()
 
 doc1 = Document(
     page_content = "RCB is Lollipop",
