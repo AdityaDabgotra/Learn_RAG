@@ -7,6 +7,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_anthropic import ChatAnthropic
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # -------- CONFIG --------
