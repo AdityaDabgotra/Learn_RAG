@@ -7,9 +7,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def process():
+    print("Pdf loading started")
     loader = PyMuPDFLoader("gunaho ka devta.pdf")
 
     data = loader.lazy_load()
+    print("Pdf loaded")
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=350,
@@ -22,14 +24,17 @@ def process():
         chunks = splitter.split_documents([doc])
         splitter_text.extend(chunks)
 
-
+    print("PDF splitted")
     vector_store = Chroma(
         embedding_function=HuggingFaceEmbeddings(model_name="l3cube-pune/indic-sentence-bert-nli"),
         persist_directory="Chroma DB",
         collection_name="Gunaho-ka-devta"
     )
+    print("Embeddings Created")
 
     vector_store.add_documents(splitter_text)
+
+    print("Added to Vector DB")
 
     return vector_store
 
@@ -49,5 +54,6 @@ if __name__ == "__main__":
         if ques.lower().strip() == 'exit':
             break
         response = retrieval(ques,store)
-        print(response)
+        for ans in response:
+            print(ans.page_content)
 
