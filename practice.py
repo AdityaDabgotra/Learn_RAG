@@ -5,7 +5,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
 
@@ -62,10 +62,10 @@ def build_qa_chain(vector_store: Chroma):
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 
     # Claude Haiku — fast and cheap, great for RAG
-    llm = ChatAnthropic(
-        model="claude-haiku-4-5-20251001",
-        temperature=0.3,      # lower = more factual, less hallucination
-        max_tokens=512,
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash",
+        temperature=0.3,
+        max_output_tokens=512,
     )
 
     prompt = PromptTemplate(
