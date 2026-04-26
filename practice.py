@@ -5,14 +5,15 @@ loader = PyMuPDFLoader("gunaho ka devta.pdf")
 
 data = loader.lazy_load()
 
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=350,
+    chunk_overlap=20,
+)
+
 splitter_text = []
-for i in data:
-    page = RecursiveCharacterTextSplitter(
-        chunk_size = 350,
-        chunk_overlap = 20,
-    )
-    
-    splitter_text.append(page.split_documents(i))
+
+for doc in data:
+    chunks = splitter.split_documents([doc])
+    splitter_text.extend(chunks)
 
 print(splitter_text)
-
