@@ -17,9 +17,6 @@ PERSIST_DIR = "chroma_db"
 COLLECTION_NAME = "gunaho-ka-devta"
 EMBED_MODEL = "l3cube-pune/indic-sentence-bert-nli"
 
-# Set your API key (or set ANTHROPIC_API_KEY env variable)
-os.environ["ANTHROPIC_API_KEY"] = "your-api-key-here"
-
 
 # -------- LOAD / CREATE VECTOR DB --------
 def get_vector_store() -> Chroma:
