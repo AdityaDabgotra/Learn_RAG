@@ -15,7 +15,7 @@ load_dotenv()
 # -------- CONFIG --------
 PERSIST_DIR = "chroma_db"
 COLLECTION_NAME = "01_The_Lightning_Thief"
-EMBED_MODEL = "l3cube-pune/indic-sentence-bert-nli"
+EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 # -------- LOAD / CREATE VECTOR DB --------
@@ -38,7 +38,7 @@ def get_vector_store() -> Chroma:
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=800,
         chunk_overlap=100,
-        separators=["\n\n", "\n", "।", ".", " ", ""],
+        separators=["\n\n", "\n", ".", " ", ""],
     )
     split_docs = splitter.split_documents(docs)
     print(f"Split into {len(split_docs)} chunks")
@@ -57,27 +57,23 @@ def get_vector_store() -> Chroma:
 # -------- BUILD QA CHAIN --------
 def build_qa_chain(vector_store: Chroma):
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
-    print(retriever)
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-2.5-flash-preview-04-17",  # correct model identifier
         temperature=0.3,
         max_output_tokens=512,
     )
 
     prompt = PromptTemplate(
         input_variables=["context", "question"],
-        template="""You are a helpful assistant for the English novel "In the Silence You Left Behind".
+        template="""You are a helpful assistant for the novel "The Lightning Thief" by Rick Riordan.
 
-The context below is extracted from the novel (in English).
-The user may ask in English .
+The context below is extracted from the novel.
 
 Rules:
 - Answer ONLY from the context provided.
-- Reply in the same language/style as the question.
-- First reply with the context you got then answer the question
-- If the answer is not in the context, say "I dont have any Idea."
-- Be concise.
+- If the answer is not in the context, say "I don't have enough information from the book to answer that."
+- Be concise and clear.
 
 Context:
 {context}
