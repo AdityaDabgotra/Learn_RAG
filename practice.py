@@ -58,7 +58,6 @@ def get_vector_store() -> Chroma:
 def build_qa_chain(vector_store: Chroma):
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 
-    # Claude Haiku — fast and cheap, great for RAG
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         temperature=0.3,
