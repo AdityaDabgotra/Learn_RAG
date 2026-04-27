@@ -74,6 +74,7 @@ The user may ask in English .
 Rules:
 - Answer ONLY from the context provided.
 - Reply in the same language/style as the question.
+- First provide the context you got then answer the question
 - If the answer is not in the context, say "I dont have any Idea."
 - Be concise.
 
