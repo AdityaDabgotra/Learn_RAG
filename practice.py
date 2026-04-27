@@ -14,7 +14,7 @@ load_dotenv()
 
 # -------- CONFIG --------
 PERSIST_DIR = "chroma_db"
-COLLECTION_NAME = "In the Silence You Left Behind"
+COLLECTION_NAME = "In_the_Silence_You_Left_Behind"
 EMBED_MODEL = "l3cube-pune/indic-sentence-bert-nli"
 
 
@@ -36,8 +36,8 @@ def get_vector_store() -> Chroma:
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=400,
-        chunk_overlap=50,
+        chunk_size=100,
+        chunk_overlap=20,
         separators=["\n\n", "\n", "।", ".", " ", ""],
     )
     split_docs = splitter.split_documents(docs)
@@ -63,6 +63,7 @@ def build_qa_chain(vector_store: Chroma):
         temperature=0.3,
         max_output_tokens=512,
     )
+    print(retriever)
 
     prompt = PromptTemplate(
         input_variables=["context", "question"],
