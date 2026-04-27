@@ -59,7 +59,7 @@ def build_qa_chain(vector_store: Chroma):
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
 
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash-preview-04-17",  # correct model identifier
+        model="gemini-2.5-flash",
         temperature=0.3,
         max_output_tokens=512,
     )
