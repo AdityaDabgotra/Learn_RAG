@@ -32,12 +32,12 @@ def get_vector_store() -> Chroma:
 
     print("No DB found. Creating new one...")
 
-    loader = PyMuPDFLoader("01_The_Lightning_Thief")
+    loader = PyMuPDFLoader("01_The_Lightning_Thief.pdf")
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=100,
-        chunk_overlap=20,
+        chunk_size=800,
+        chunk_overlap=100,
         separators=["\n\n", "\n", "।", ".", " ", ""],
     )
     split_docs = splitter.split_documents(docs)
@@ -57,6 +57,7 @@ def get_vector_store() -> Chroma:
 # -------- BUILD QA CHAIN --------
 def build_qa_chain(vector_store: Chroma):
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
+    print(retriever)
 
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
