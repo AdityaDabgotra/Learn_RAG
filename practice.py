@@ -63,7 +63,6 @@ def build_qa_chain(vector_store: Chroma):
         temperature=0.3,
         max_output_tokens=512,
     )
-    print(retriever)
 
     prompt = PromptTemplate(
         input_variables=["context", "question"],
@@ -75,6 +74,7 @@ The user may ask in English .
 Rules:
 - Answer ONLY from the context provided.
 - Reply in the same language/style as the question.
+- first give the context and then answer it
 - If the answer is not in the context, say "I dont have any Idea."
 - Be concise.
 
