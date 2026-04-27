@@ -14,7 +14,7 @@ load_dotenv()
 
 # -------- CONFIG --------
 PERSIST_DIR = "chroma_db"
-COLLECTION_NAME = "gunaho-ka-devta"
+COLLECTION_NAME = "In the Silence You Left Behind"
 EMBED_MODEL = "l3cube-pune/indic-sentence-bert-nli"
 
 
@@ -32,7 +32,7 @@ def get_vector_store() -> Chroma:
 
     print("No DB found. Creating new one...")
 
-    loader = PyMuPDFLoader("gunaho ka devta.pdf")
+    loader = PyMuPDFLoader("In the Silence You Left Behind.pdf")
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
@@ -66,15 +66,15 @@ def build_qa_chain(vector_store: Chroma):
 
     prompt = PromptTemplate(
         input_variables=["context", "question"],
-        template="""You are a helpful assistant for the Hindi novel "Gunaho Ka Devta".
+        template="""You are a helpful assistant for the English novel "In the Silence You Left Behind".
 
-The context below is extracted from the novel (in Hindi).
-The user may ask in Hinglish (Hindi written in Roman script).
+The context below is extracted from the novel (in English).
+The user may ask in English .
 
 Rules:
 - Answer ONLY from the context provided.
-- Reply in the same language/style as the question (Hindi or Hinglish).
-- If the answer is not in the context, say "Mujhe is baare mein context mein koi information nahi mili."
+- Reply in the same language/style as the question.
+- If the answer is not in the context, say "I dont have any Idea."
 - Be concise.
 
 Context:
