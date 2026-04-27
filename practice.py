@@ -14,7 +14,7 @@ load_dotenv()
 
 # -------- CONFIG --------
 PERSIST_DIR = "chroma_db"
-COLLECTION_NAME = "In_the_Silence_You_Left_Behind"
+COLLECTION_NAME = "01_The_Lightning_Thief"
 EMBED_MODEL = "l3cube-pune/indic-sentence-bert-nli"
 
 
@@ -32,7 +32,7 @@ def get_vector_store() -> Chroma:
 
     print("No DB found. Creating new one...")
 
-    loader = PyMuPDFLoader("In the Silence You Left Behind.pdf")
+    loader = PyMuPDFLoader("01_The_Lightning_Thief")
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(
@@ -74,7 +74,6 @@ The user may ask in English .
 Rules:
 - Answer ONLY from the context provided.
 - Reply in the same language/style as the question.
-- first give the context and then answer it
 - If the answer is not in the context, say "I dont have any Idea."
 - Be concise.
 
